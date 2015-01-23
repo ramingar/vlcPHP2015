@@ -5,16 +5,12 @@
  * 
  * @param array $form definition
  * @param array $datafiltered filtered
- * @return boolean | array ('fildname'=>'error message') $validatedata
+ * @return boolean | array ('fieldname'=>'error message') $validatedata
  */
 function validateForm($form, $dataFiltered)
 {
-    $validateData = null;
-    echo "<pre>";
-    echo print_r($validateData);
-    echo "</pre>";
-    die;
-    /*
+    $validateData = 2;
+
     foreach ($form as $field => $valueForm) {
         if (array_key_exists('validation', $valueForm)) {
             $validations = $valueForm['validation'];
@@ -36,12 +32,8 @@ function validateForm($form, $dataFiltered)
             }
         }
     }
-    
+
     $validateData = !($validateData == null) ? $validateData : true;
-    echo "<pre>";
-    echo print_r($validateData);
-    echo "</pre>";
-    */
     return $validateData;
 }
 
