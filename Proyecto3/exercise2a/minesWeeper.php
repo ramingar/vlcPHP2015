@@ -65,7 +65,7 @@ for ($ii=0; $ii<$cells; $ii++) {
 echo '</tr></table>';
 
 echo '<br/>';
-echo $dead ? 'HAS PERDIDO!!!!' : '';
+echo $dead ? 'HAS PERDIDO!!!! <a href="minesResult.php">Ver resultado</a>' : '';
 echo count($opened)>=$cells-$mines ? 'HAS GANADO!!!!' : '';
 echo '<br/>';
 echo '<a href="main.html">Volver a empezar</a>';
