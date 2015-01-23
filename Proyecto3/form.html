@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>My form</title>
+</head>
+<body>
+<form action="newUser.php" method="POST">
+	<ol>
+		<li><input id="name" type="text" placeholder="name" name="name" help="NOMBREEEE!!" /></li>
+		<li><input type="email" placeholder="email" name="email" /></li>
+		<li><input type="password" placeholder="password" name="pass" /></li>
+		<li><textarea rows="4" cols="10" placeholder="description" name="description"></textarea></li>
+		<li><input type="file" placeholder="photo" name="photo" /></li>
+		<li>
+			<label>Sexo:</label>
+			<input type="radio" name="gender" value="hombre" />Hombre
+			<input type="radio" name="gender" value="mujer" />Mujer
+			<input type="radio" name="gender" value="otro" />Otro
+		</li>
+		<li>
+			<label>Ciudad:</label>
+			<select name="city" multiple="multiple">
+				<option value="valencia">Valencia</option>
+				<option value="madrid">Madrid</option>
+				<option value="barcelona">Barcelona</option>
+			</select>
+		</li>
+		<li>
+			<input type="date" placeholder="bdate" name="bdate" />
+		</li>
+		<li><input type="submit" value="enviar" /></li>
+	</ol>
+</form>
+</body>
+</html>
