@@ -83,11 +83,20 @@ switch($action)
         echo "esto es delete";
         if(isset($_POST['id']))
         {
+            // $_POST['id'];
+            $usuarios = file_get_contents('usuarios.txt');
+            $usuarios = explode("\n", $usuarios);
+            echo '<pre>';
+            print_r($usuarios[$_POST['id']]);
+            echo '</pre>';
+            $usuarios[$_POST['id']] = "\n";
+            file_put_contents('usuarios2.txt',implode("|",$usuarios)."\n",FILE_APPEND);
             
+            //header('Location: /usuarios.php');
         }
         else
         {
-            // Mostar en el formulario
+            // Mostar el formulario
             include('delete.php');
         }
             
