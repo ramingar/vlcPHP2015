@@ -1,35 +1,60 @@
 <?php
-echo 'hello world!';
-echo '<br/>';       // en html pero no en código
-echo '\n';          // pone el literal
-echo "\n";          // las comillas dobles evalúan el carácter de escapado
-echo "\"rafeta\"";
-echo 'rafeta';
+echo "Hello World";
+echo "<br />";
+echo "\n";
+echo "\"Agustín\"";
+
+
+
+
+
+echo "<hr/>";
 
 // Comentario
 
-echo "hola"; // Comentario
+echo "Hola"; // Comentario hasta el final de linea
 
 /*
- * Comentario
+ * Comentario de 
+ * varias lineas
+ * 
  */
 
 /**
- * Viene con el IDE Zend Studio y sirve para crear DocBlocks (bloques de docu)
- * Viene de PhpDocumentor.
+ * Esto es documentacion
+ * de varias lineas
  */
  
-// echo y print
-// echo es una instrucción (no devuelve nada)
-// print es una función que devolverá un valor (true si salió bien)
 
-echo "hola" . " mundo"; // se puede usar coma, pero la bna práctica con punto
+print ("Hola"."Mundos");
+echo "Hola"."Mundo";
 
-// include y require
-// los dos incluyen el fichero, la diferencia es el nivel de error
-// require te da un fatal error si no puede incluir el fichero
+echo "<hr/>";
 
-// niveles: noticia, warning, y fatal error
+echo "Hola","Mundo";
 
-// tb existe: include_one y require_one para que solo lo exija una vez, si
-// está no lo vuelve a incluir
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

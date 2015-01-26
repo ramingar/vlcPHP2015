@@ -1,5 +1,10 @@
 <?php
-
+/**
+ * Return Fibonacci serie in array
+ * 
+ * @param integer $max
+ * @return array
+ */
 function fibonacci($max)
 {
     $f0 = 0;
@@ -8,8 +13,7 @@ function fibonacci($max)
     $serie[0] = 0;
     $serie[1] = 1;
     $i = 2;
-    while ($f2 <= $max)
-    {
+    while ($f2 <= $max) {
         $serie[$i] = $f2;
         $f0 = $f1;
         $f1 = $f2;
@@ -18,3 +22,6 @@ function fibonacci($max)
     }
     return $serie;
 }
+
+
+
