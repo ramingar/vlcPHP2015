@@ -1,14 +1,16 @@
 <?php
 
+include('../modules/core/src/core/models/parseURL.php');
+
+// echo "<pre>";
+// print_r($_SERVER['REQUEST_URI']);
+// echo "</pre>";
+
+$request = parseURL($_SERVER['REQUEST_URI']);
 
 echo "<pre>";
-print_r($_SERVER['REQUEST_URI']);
+print_r($request);
 echo "</pre>";
-
-
-
-$request = parseURL();
-
 
 switch($request['controller'])
 {
