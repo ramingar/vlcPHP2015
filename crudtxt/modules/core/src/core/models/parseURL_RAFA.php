@@ -1,9 +1,10 @@
 <?php
 
 
-function parseURL($uri)
+function parseURL()
 {
     $controllers = array ('usuarios'=>array('insert', 'select', 'update', 'delete'));
+    $uri = $_SERVER['REQUEST_URI'];
     $request = array();
     $params = array();
     $idx = '';
@@ -40,7 +41,8 @@ function parseURL($uri)
             $request['params'] = $params;
         } else {
             unset($request);
-            $request['error'] = 412;
+            $request['controller'] = 'error';
+            $request['action'] = '412';
         }
     }
     
@@ -53,7 +55,7 @@ function parseURL($uri)
     //         * YES, Action in URI:
     //               Action exists     -> C=controller / A=action   // RESULT 4 (no need to change anything)
     //               Action NOT exist  -> error = 404               // RESULT 5
-    if (!isset($request['error']))
+    if (!isset($request['controller'])=='error')
     {
         if ($request['controller']!='')
         {
@@ -64,12 +66,12 @@ function parseURL($uri)
                 in_array($request['controller'],
                          array_map(function ($v) {
                              return explode('.', $v)[0];
-                         },scandir('../modules/application/src/application/controllers'))
+                         },scandir($_SERVER['DOCUMENT_ROOT'] . '/../modules/application/src/application/controllers'))
                 ) == true
             ){
                 if (isset($request['action']))
                 {
-                    $controller = file_get_contents('../modules/application/src/application/controllers/'.$request['controller'].'.php');
+                    $controller = file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/../modules/application/src/application/controllers/'.$request['controller'].'.php');
                     if (
                         !in_array('case \''.$request['action'].'\':',
                                   array_map(function ($v) {
@@ -79,7 +81,8 @@ function parseURL($uri)
                     ){
                         // RESULT 5
                         unset($request);
-                        $request['error'] = 404;
+                        $request['controller'] = 'error';
+                        $request['action'] = '404';
                     }
                 } else {
                     // RESULT 3
@@ -88,10 +91,12 @@ function parseURL($uri)
             } else {
                 // RESULT 2
                 unset($request);
-                $request['error'] = 404;
+                $request['controller'] = 'error';
+                $request['action'] = '404';
             }
         } else {
             // RESULT 1
+            unset($request);
             $request['controller'] = 'index';
             $request['action'] = 'index';
         }
