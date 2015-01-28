@@ -17,7 +17,7 @@ WHERE users.iduser = users_has_hobbies.users_iduser
 	AND users_has_hobbies.hobbies_idhobby = hobbies.idhobby;
 
 -- usuarios con hobbies separados por comas
-SELECT hobbies.hobby, GROUP_CONCAT(users.name)
+SELECT users.name, GROUP_CONCAT(hobbies.hobby)
 FROM users, hobbies, users_has_hobbies
 WHERE users.iduser = users_has_hobbies.users_iduser 
 	AND users_has_hobbies.hobbies_idhobby = hobbies.idhobby
