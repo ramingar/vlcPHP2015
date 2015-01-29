@@ -58,10 +58,6 @@ switch($request['action'])
         {
             $usuario = getUser($request['params']['id'], $filename);
             $content = renderView($request, $config, array('usuario'=>$usuario));
-//             ob_start();
-//                 include('../modules/application/src/application/views/usuarios/update.phtml');
-//                 $content = ob_get_contents();
-//             ob_end_clean();
         }
     break;
     
@@ -79,7 +75,8 @@ switch($request['action'])
     break;
     
     default:
-    case 'select':  
+    case 'select':
+        $request['action']='select';
         $usuarios = getUsers($filename);
         // El array son los parámetros que le tiene que llegar a la vista gracias a hacer el include de ella.
         // Es donde estarán los datos que se van a mostrar en la vista.
