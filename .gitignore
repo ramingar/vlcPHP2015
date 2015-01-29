@@ -4,3 +4,5 @@ nbproject
 .idea
 .tm_propertiesTextMate2
 .buildpath
+bower_components
+bower_components/*
