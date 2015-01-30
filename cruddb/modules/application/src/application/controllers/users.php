@@ -75,8 +75,9 @@ switch($request['action'])
     break;
     
     default:
-    case 'select':
+    case 'index':
         $request['action']='select';
+    case 'select':
         $usuarios = getUsers($filename);
         // El array son los parámetros que le tiene que llegar a la vista gracias a hacer el include de ella.
         // Es donde estarán los datos que se van a mostrar en la vista.
