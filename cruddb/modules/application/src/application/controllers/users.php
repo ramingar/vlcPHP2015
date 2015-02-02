@@ -9,6 +9,7 @@ include ('../modules/application/src/application/models/insertUserDB.php');
 include ('../modules/application/src/application/models/updateUser.php');
 include ('../modules/application/src/application/models/updateUserDB.php');
 include ('../modules/application/src/application/models/deleteUser.php');
+include ('../modules/application/src/application/models/deleteUserDB.php');
 
 include('../modules/application/src/application/forms/userForm.php');
 
@@ -70,12 +71,13 @@ switch($request['action'])
     case 'delete':
         if(isset($_POST['id']))
         {
-            deleteUser($_POST['id'], $filename);
+//             deleteUser($_POST['id'], $filename);
+            deleteUserDB($config, $_POST['id']);
             header('Location: /users');
         }
         else
         {
-            $content = renderView($request, $config);
+            $content = renderView($request, $config, array('usuario'=>$request['params']['id']));
         }
             
     break;
