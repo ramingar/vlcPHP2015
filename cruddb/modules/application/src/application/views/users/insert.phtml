@@ -36,7 +36,7 @@ enctype="multipart/form-data">
         </li>
         <li>
             <label>Privacidad</label>
-            Si<input type="checkbox" name="privacy[]" value="si" <?php if(in_array('si', $usuario[6])) echo 'checked';?>/>
+            Sí<input type="checkbox" name="privacy[]" value="si" <?php if(in_array('si', $usuario[6])) echo 'checked';?>/>
             Spam<input type="checkbox" name="privacy[]" value="spam" <?=(in_array('spam', $usuario[6]))?'checked':'';?>/>
         </li>
         <li>
@@ -50,7 +50,7 @@ enctype="multipart/form-data">
             <select name="cities_idcity">
                 <option value="1" <?=($usuario[8]=='Valencia')?'checked':'';?>>Valencia</option>
                 <option value="2" <?=($usuario[8]=='BCN')?'checked':'';?>>Barcelona</option>
-                <option value="3" <?=($usuario[8]=='Madrid')?'checked':'';?>>Madrid</option>                
+                <option value="3" <?=($usuario[8]=='Madrid')?'checked':'';?>>Madrid</option>
             </select>
         </li>
         

@@ -1,64 +1,62 @@
 <?php
-
 /**
- * Validate form
- * 
- * @param array $form definition
- * @param array $data filtered
- * @return boolean | array ('fildname'=>'error message')
- */
-function validateForm($form, $datafiltered)
-
+* Validate form
+*
+* @param array $form definition
+* @param array $datafiltered filtered
+* @return boolean | array ('fieldname'=>'error message') $validatedata
+*/
+function validateForm($form, $dataFiltered)
 {
-    $validatedata = null;
     
-    foreach ($form as $key => $form_field) {
-//        if ($form[$key]['validation'] != null) { // hay que validar
-        if (array_key_exists( 'validation', $form[$key] )) { // hay que validar
-            
-            $validation = $form_field['validation'];
-            
-            $valor = $datafiltered[$key];
-            
-            foreach ($validation as $val_type => $val_data) {
-                switch ($val_type) {
-                    case 'required':
-                        if ($valor == null) {
-                            if (array_key_exists('error_message', $validation)) { 
-                                $validatedata[$key] = $validation['error_message'];
-                            } else {
-                                $validatedata[$key] = $key." no puede ser nulo";
-                            }
-                        }
+//     echo '<pre>';
+//     echo("->>>>> dentro de validateForm!!!\n");
+//     print_r($dataFiltered);
+//     echo '</pre>';
+    
+    $validateData = 2;
+    foreach ($form as $field => $valueForm) {
+        if (array_key_exists('validation', $valueForm)) {
+            $validations = $valueForm['validation'];
+            if ($validations) {
+                $errorMessage = array_key_exists('error_message', $validations) ? $validations['error_message'] : 'Es necesario introducir un valor.';
+                foreach ($validations as $keyValidation => $valueValidation) {
+                    switch ($keyValidation) {
+                        case 'required':
+                            $validateData = required($valueValidation, $field, $dataFiltered, $errorMessage);
+                            break;
+                        case 'minsize':
+                        //minSize();
                         break;
-                    case 'minsize':
-                       // echo '<pre>';
-                       // print_r(strlen($valor));
-                       // echo '</pre>';
-                        if ($valor != null && (strlen($valor) < $validation['minsize'])) {
-                            if (array_key_exists('error_message', $validation)) { 
-                                $validatedata[$key] = $validation['error_message'];
-                            } else {
-                                $validatedata[$key] = $key." debe de tener más de ".$validation['minsize'];
-                            }
-                        }
+                        case 'maxsize':
+                        //maxSize();
                         break;
-                    case 'maxsize':
-                        if ($valor != null && (strlen($valor) > $validation['maxsize'])) {
-                            if (array_key_exists('error_message', $validation)) { 
-                                $validatedata[$key] = $validation['error_message'];
-                            } else {
-                                $validatedata[$key] = $key." debe de tener más de ".$validation['maxsize'];
-                            }
-                        }
-                        break;
+                    }
                 }
             }
         }
     }
-    
-   if ($validatedata == null) {
-       $validatedata = true;
-   }
-    return $validatedata;
+    $validateData = !($validateData == null) ? $validateData : true;
+    return $validateData;
+}
+
+function required($isRequired, $field, $data, $errorMessage)
+{
+    $result = null;
+    if ($isRequired) {
+        $result = strlen($data[$field])>0 ? null : array($field, $errorMessage);
+    }
+    return $result;
+}
+
+function minSize()
+{
+    $result = true;
+    return $result;
+}
+
+function maxSize() 
+{
+    $result = true;
+    return $result;
 }

@@ -1,7 +1,7 @@
 <?php
 
-function getUser($id, $filename)
-{
+function getUser($config, $id)
+{    
     // Leer el archivo de usuarios.txt
     $usuarios = file_get_contents($filename);
     // Separar por saltos de linea en usuarios
