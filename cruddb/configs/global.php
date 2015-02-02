@@ -6,5 +6,8 @@ return array (
     'config2'=>'data2',
     'view_path'=>$_SERVER['DOCUMENT_ROOT'].'/../modules/application/src/application/views',
     'controller_path'=>$_SERVER['DOCUMENT_ROOT'].'/../modules/application/src/application/controllers',
-    
+    'db'=>array('host'=>'localhost',
+            'user'=>'php',
+            'password'=>'1234',
+            'database'=>'crud'),
 );
