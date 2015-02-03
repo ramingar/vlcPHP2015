@@ -1,3 +1,4 @@
+//# clases/modules/application/src/application/controllers/users.php
 <?php
 
 include_once ('../modules/core/src/core/models/Adapter.php');
@@ -89,7 +90,7 @@ switch($request['action'])
     
     default:
     case 'index':
-    case 'select':
+    case 'select':  
         //$usuarios1 = getUsers($filename);
         //$usuarios = getUsersDB($config);
         $adapter = new Adapter($config);

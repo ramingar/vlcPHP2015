@@ -4,7 +4,8 @@
 function getConfig()
 {   
     return (array_merge(require_once('../configs/global.php'),
-                        require_once('../configs/local.php')
+                        require_once('../configs/local.php'),
+                        require_once('../configs/configDb.php')
                         )
             );
    
