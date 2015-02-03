@@ -1,0 +1,10 @@
+<?php 
+$usuario = $data['usuario'];
+?>
+¿Está REALMENTE seguro de que quiere ELIMINAR este usuario?'
+<form method="POST">
+<input name="id" type="hidden" value="<?=$usuario;?>" />
+<input type="submit" value="Bórrame!" name="submit"/>
+<input type="submit" value="No" name="submit"/>
+<a href="/users/select">Volver</a>
+</form>
