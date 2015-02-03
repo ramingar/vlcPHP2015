@@ -6,5 +6,5 @@ nbproject
 .buildpath
 bower_components
 bower_components/*
-assets/vendor/*
-assets/vendor
+*/assets/vendor/*
+*/assets/vendor
