@@ -8,13 +8,14 @@
     <meta name="author" content="">
     <link rel="icon" href="/favicon.ico">
 
-    <title>Dashboard Template for Bootstrap</title>
+    <title><?=strtoupper($request['controller']);?> -
+            <?=strtoupper($request['action']);?></title>
 
     <!-- Bootstrap core CSS -->
     <link href="/assets/vendor/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="/css/dashboard.css" rel="stylesheet">
+    <link href="/assets/css/dashboard.css" rel="stylesheet">
 
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <!--[if lt IE 9]><script src="/assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
@@ -41,9 +42,12 @@
           <?php include('/../modules/application/src/application/layouts/partials/menu.phtml');?>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-          <h1 class="page-header">Dashboard</h1>
+          <h1 class="page-header">
+            <?=strtoupper($request['controller']);?> -
+            <?=strtoupper($request['action']);?>
+          </h1>
 
-          <?php include('/../modules/application/src/application/layouts/partials/statistics.phtml');?>
+          <?php //include('/../modules/application/src/application/layouts/partials/statistics.phtml');?>
 
           <?php //include('/../modules/application/src/application/layouts/partials/table.phtml');?>
           <?=$content; ?>
@@ -56,7 +60,7 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <script src="/dist/js/bootstrap.min.js"></script>
+    <script src="/assets/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="/assets/js/docs.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="/assets/js/ie10-viewport-bug-workaround.js"></script>

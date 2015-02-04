@@ -3,11 +3,6 @@
 
 function renderView($request, $config, $data=null)
 {
-//     echo '<pre>';
-//     print_r($config['view_path'].'/'.
-//                 $request['controller'].'/'.
-//                 $request['action'].'.phtml');
-//     echo '</pre>';
     ob_start();
         include($config['view_path'].'/'.
                 $request['controller'].'/'.

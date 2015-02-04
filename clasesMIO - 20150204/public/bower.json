@@ -1,0 +1,22 @@
+{
+  "name": "clases",
+  "version": "0.1.0",
+  "homepage": "https://github.com/ramingar/vlcPHP2015",
+  "authors": [
+    "Rafael Minguet <rminguet@gmail.com>"
+  ],
+  "description": "crudtxt project but now using classes",
+  "main": "index.php",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "assets/vendor",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.2"
+  }
+}

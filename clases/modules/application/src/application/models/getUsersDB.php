@@ -1,4 +1,5 @@
 <?php
+
 function getUsersDB($config)
 {
     //$usuarios=[];

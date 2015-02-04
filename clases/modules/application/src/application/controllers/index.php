@@ -1,11 +1,10 @@
 <?php
 
-include_once('../modules/core/src/core/models/renderView.php');
 
 
 
 
-
+include('../modules/core/src/core/models/renderView.php');
 
 
 
@@ -16,8 +15,9 @@ include_once('../modules/core/src/core/models/renderView.php');
 switch($request['action'])
 {        
     default:
-    case 'index':
-        $content = renderView($request, $config, array('title'=>'Hello World!!!!!'));
+    case 'index':  
+        
+        $content = renderView($request, $config);
     break;
 }
 

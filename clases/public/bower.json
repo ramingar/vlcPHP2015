@@ -1,12 +1,11 @@
 {
   "name": "clases",
-  "version": "0.1.0",
-  "homepage": "https://github.com/ramingar/vlcPHP2015",
+  "version": "1.0.0",
+  "homepage": "https://github.com/agustincl/vlc2015m",
   "authors": [
-    "Rafael Minguet <rminguet@gmail.com>"
+    "Agustin Calderon <agustincl@gmail.com>"
   ],
-  "description": "crudtxt project but now using classes",
-  "main": "index.php",
+  "description": "Clases en phph",
   "license": "MIT",
   "ignore": [
     "**/.*",

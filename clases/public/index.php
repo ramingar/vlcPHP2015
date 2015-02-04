@@ -1,29 +1,50 @@
 <?php
+require_once('../autoload.php');
 
-require_once('../modules/core/src/core/models/parseURL.php');
-require_once('../modules/core/src/core/models/getConfig.php');
+$config = core\models\FrontController::getConfig();
+$request = core\models\FrontController::parseURL();
+// $request = core\models\FrontController::routeURL($request);
 
-$config = getConfig();
-$request = parseURL();
-// $request = routeURL($request);
+// $mysql = new acl\adapters\MysqlAdapter($config['db']);
 
-$controllerPath = $config['controller_path'];
+// $query = "SELECT * FROM users";
+
+// $usuario = $mysql->querySelect($query);
+
+// echo "<pre>";
+// print_r($usuario);
+// echo "</pre>";
+
+
+
 
 
 switch($request['controller'])
 {
     case 'users':
-        include_once($controllerPath.'/users.php');
+        include('../modules/application/src/application/controllers/users.php');
     break;
     
     case 'error':
-        include_once($controllerPath.'/error.php');
+        include('../modules/application/src/application/controllers/error.php');
     break; 
 
     case 'index':
-        include_once($controllerPath .'/index.php');
+        include('../modules/application/src/application/controllers/index.php');
     break;
     
         
     
 }
+
+
+
+
+
+
+
+
+
+
+
+

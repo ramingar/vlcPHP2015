@@ -1,10 +1,5 @@
 <?php
 
-include_once ('../modules/core/src/core/models/Adapter.php');
-include_once ('../modules/application/src/application/entities/UserRepository.php');
-
-
-
 include ('../modules/application/src/application/models/getUsers.php');
 include ('../modules/application/src/application/models/getUsersDB.php');
 include ('../modules/application/src/application/models/getUserDB.php');
@@ -77,7 +72,10 @@ switch($request['action'])
         if(isset($_POST['id']))
         {
 //             deleteUser($_POST['id'], $filename);
-            deleteUserDB($config, $_POST['id']);
+            if($_POST['submit']=='Bórrame!')
+            {
+                deleteUserDB($config, $_POST['id']);
+            }
             header('Location: /users');
         }
         else
@@ -89,12 +87,9 @@ switch($request['action'])
     
     default:
     case 'index':
-    case 'select':
+    case 'select':  
         //$usuarios1 = getUsers($filename);
-        //$usuarios = getUsersDB($config);
-        $adapter = new Adapter($config);
-        $usuarios = (new UserRepository())->getUsers($adapter);
-        
+        $usuarios = getUsersDB($config);        
         $content = renderView($request, $config, array('usuarios'=>$usuarios));
     break;
 }

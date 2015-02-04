@@ -1,0 +1,18 @@
+<?php 
+$usuarios = $data['usuarios'];
+?>
+<a href="/users/insert">Insert</a>
+<table  class="table table-striped">
+<?php foreach ($usuarios as $key => $usuario):?>
+    <tr>
+        <td> <?=$usuario->name;?> </td>
+        <td> <?=$usuario->email;?> </td>
+        <td> <?=$usuario->bdate;?> </td>
+        <td> <?=$usuario->description;?> </td>
+        <td>
+            <a href="/users/update/id/<?=$usuario->iduser;?>">Update</a> | 
+            <a href="/users/delete/id/<?=$usuario->iduser;?>">Delete</a>
+        </td>
+    </tr>
+<?php endforeach;?>
+</table>

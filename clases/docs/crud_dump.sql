@@ -16,27 +16,27 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `agreements`
+-- Table structure for table `agreetments`
 --
 
-DROP TABLE IF EXISTS `agreements`;
+DROP TABLE IF EXISTS `agreetments`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `agreements` (
-  `idagreement` int(11) NOT NULL AUTO_INCREMENT,
-  `agreement` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`idagreement`)
+CREATE TABLE `agreetments` (
+  `idagreetment` int(11) NOT NULL AUTO_INCREMENT,
+  `agreetment` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`idagreetment`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `agreements`
+-- Dumping data for table `agreetments`
 --
 
-LOCK TABLES `agreements` WRITE;
-/*!40000 ALTER TABLE `agreements` DISABLE KEYS */;
-INSERT INTO `agreements` VALUES (1,'Sí'),(2,'Spam');
-/*!40000 ALTER TABLE `agreements` ENABLE KEYS */;
+LOCK TABLES `agreetments` WRITE;
+/*!40000 ALTER TABLE `agreetments` DISABLE KEYS */;
+INSERT INTO `agreetments` VALUES (1,'Si'),(2,'Spam');
+/*!40000 ALTER TABLE `agreetments` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -59,7 +59,7 @@ CREATE TABLE `cities` (
 
 LOCK TABLES `cities` WRITE;
 /*!40000 ALTER TABLE `cities` DISABLE KEYS */;
-INSERT INTO `cities` VALUES (1,'Valencia'),(2,'Madrid'),(3,'Barcelona'),(4,'Paterna'),(5,'Albacete'),(6,'Albacete');
+INSERT INTO `cities` VALUES (1,'Valencia'),(2,'Barcelona'),(3,'Madrid'),(4,'Paterna'),(5,'Albacete'),(6,'Albacete');
 /*!40000 ALTER TABLE `cities` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -143,35 +143,35 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES ('user1','Rafael Minguet','rminguet@gmail.com','1234','blablabla','absurdo.png','2000-01-31 00:00:00',1,2),('user2','Agustín','agustincl@gmail.com','4321','masblabla','foto.png','2001-02-15 00:00:00',3,2),('user5','minombre','blab@la.com','123123',NULL,NULL,NULL,1,1),('user6','nombre2a','b1111@ggg.com','11231',NULL,NULL,NULL,1,2);
+INSERT INTO `users` VALUES ('user1','Agustin','agustincl@gmail.com','1234','desc','image1.jpg','2010-10-10 00:00:00',1,1),('user2','a','a','a','a','a','2011-11-11 00:00:00',1,2),('user3','b','b','b','b','b','2012-12-12 00:00:00',2,3),('user4','c','c','c','c','c','2013-12-12 00:00:00',4,1),('user5','5','5email','5password',NULL,NULL,NULL,1,1),('user6','6','6','6',NULL,NULL,NULL,2,2);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `users_has_agreements`
+-- Table structure for table `users_has_agreetments`
 --
 
-DROP TABLE IF EXISTS `users_has_agreements`;
+DROP TABLE IF EXISTS `users_has_agreetments`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `users_has_agreements` (
+CREATE TABLE `users_has_agreetments` (
   `users_iduser` varchar(255) NOT NULL,
-  `agreements_idagreement` int(11) NOT NULL,
-  PRIMARY KEY (`users_iduser`,`agreements_idagreement`),
-  KEY `fk_users_has_agreements_agreements1_idx` (`agreements_idagreement`),
-  KEY `fk_users_has_agreements_users1_idx` (`users_iduser`),
-  CONSTRAINT `fk_users_has_agreements_agreements1` FOREIGN KEY (`agreements_idagreement`) REFERENCES `agreements` (`idagreement`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_users_has_agreements_users1` FOREIGN KEY (`users_iduser`) REFERENCES `users` (`iduser`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  `agreetments_idagreetment` int(11) NOT NULL,
+  PRIMARY KEY (`users_iduser`,`agreetments_idagreetment`),
+  KEY `fk_users_has_agreetments_agreetments1_idx` (`agreetments_idagreetment`),
+  KEY `fk_users_has_agreetments_users1_idx` (`users_iduser`),
+  CONSTRAINT `fk_users_has_agreetments_agreetments1` FOREIGN KEY (`agreetments_idagreetment`) REFERENCES `agreetments` (`idagreetment`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_users_has_agreetments_users1` FOREIGN KEY (`users_iduser`) REFERENCES `users` (`iduser`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `users_has_agreements`
+-- Dumping data for table `users_has_agreetments`
 --
 
-LOCK TABLES `users_has_agreements` WRITE;
-/*!40000 ALTER TABLE `users_has_agreements` DISABLE KEYS */;
-/*!40000 ALTER TABLE `users_has_agreements` ENABLE KEYS */;
+LOCK TABLES `users_has_agreetments` WRITE;
+/*!40000 ALTER TABLE `users_has_agreetments` DISABLE KEYS */;
+/*!40000 ALTER TABLE `users_has_agreetments` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -198,7 +198,7 @@ CREATE TABLE `users_has_hobbies` (
 
 LOCK TABLES `users_has_hobbies` WRITE;
 /*!40000 ALTER TABLE `users_has_hobbies` DISABLE KEYS */;
-INSERT INTO `users_has_hobbies` VALUES ('user1',1),('user2',1),('user1',2);
+INSERT INTO `users_has_hobbies` VALUES ('user1',1),('user2',1),('user4',1),('user1',2),('user3',2),('user4',2),('user1',3);
 /*!40000 ALTER TABLE `users_has_hobbies` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -210,12 +210,12 @@ DROP TABLE IF EXISTS `usersdata`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `usersdata` (
-  `idusersdata` int(11) NOT NULL AUTO_INCREMENT,
+  `iduserdata` int(11) NOT NULL,
   `phone_number` varchar(45) DEFAULT NULL,
   `facebook_id` varchar(45) DEFAULT NULL,
   `twitter_id` varchar(45) DEFAULT NULL,
   `users_iduser` varchar(255) NOT NULL,
-  PRIMARY KEY (`idusersdata`),
+  PRIMARY KEY (`iduserdata`,`users_iduser`),
   KEY `fk_usersdata_users1_idx` (`users_iduser`),
   CONSTRAINT `fk_usersdata_users1` FOREIGN KEY (`users_iduser`) REFERENCES `users` (`iduser`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -239,4 +239,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-01-29 11:17:48
+-- Dump completed on 2015-01-29 11:13:02

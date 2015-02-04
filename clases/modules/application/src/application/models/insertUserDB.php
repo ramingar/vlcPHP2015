@@ -31,8 +31,13 @@ function insertUserDB($config, $data)
     }
     $query = implode(",", $query);
     $query = 'INSERT INTO users SET '.$query;
+   
     
+//     echo "<pre>";
+//     print_r($query);
+//     echo "</pre>";
     
+//     die;
     $result = mysqli_query($link, $query);
     
    
