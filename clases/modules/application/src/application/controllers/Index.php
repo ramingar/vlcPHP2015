@@ -1,21 +1,24 @@
 <?php
+namespace application\controllers;
 
 include('../modules/core/src/core/models/renderView.php');
 
 
 class Index
 {
-    public $filename;
+    public $config;
     public $request;
-    
-    public function __construct($config)
+
+
+    public function __construct($config, $request)
     {
-        $this->config = $config['filename'];
+        $this->request = $request;
+        $this->config = $config;
     }
     
     public function indexAction()
     {
-        $content = renderView($request, $config);
+        $content = renderView($this->request, $this->config);
     }
 }
 

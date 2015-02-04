@@ -3,10 +3,12 @@ namespace core\models;
 class Dispatch
 {
     public $request;
+    private $config;
 
-    public function __construct($request)
+    public function __construct($request, $config)
     {
         $this->request = $request;
+        $this->config = $config;
     }
 
     public function run()
@@ -14,7 +16,7 @@ class Dispatch
         $controllerName = $this->request['controller'];  //# application\controllers\Users
         $actionName = $this->request['action'];
 
-        $controller = new $controllerName();
+        $controller = new $controllerName($this->config, $this->request);
         $controller->$actionName();
     }
 
