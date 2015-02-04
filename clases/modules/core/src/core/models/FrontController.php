@@ -14,74 +14,122 @@ class FrontController
     
     public static function parseURL()
     {
-         
-        $controllers = array ('users'=>array('index','insert', 'select', 'update', 'delete'),
-            'error'=>array('404'),
-            'index'=>array('index')
-        );
-    
-        // dividir la url en un array
-        $request = explode("/", $_SERVER['REQUEST_URI']);
-         
-        if($request[1]=='')
-            return array('controller'=>'index',
-                'action'=>'index'
-            );
-    
-            // Mientras que el ultimo elemento es vacio, eliminarlo
-            while($request[count($request)-1]=='')
-                unset($request[count($request)-1]);
-    
-            // Tiene parametros?
-            $params = array();
-            // Es longitud par?
-            if(count($request)>3 && (count($request)%2)==0)
-            {
-                // KO deveolver error 412
-                return array('controller'=>'error',
-                    'action'=>'412'
-                );
+        
+        $controllers = array ('usuarios'=>array('insert', 'select', 'update', 'delete'));
+        $uri = $_SERVER['REQUEST_URI'];
+        $request = array();
+        $params = array();
+        $idx = '';
+        
+        // Convert $uri = '/usuarios/update/id/8' in:
+        // $request = array ('controller'=>'usuarios',
+        //                   'action'=>'update',
+        //                   'params'=>array('id'=>8)
+        // );
+        $uri = substr($uri,0,1)=='/' ? substr($uri,1,strlen($uri)-1) : $uri;    // WARNING: slash in first position
+        $uri = substr($uri,-1)=='/' ? substr($uri,0,strlen($uri)-1) : $uri;     // WARNING: trail slash!!
+        $uri = explode('/', $uri);
+        
+        
+        foreach ($uri as $key => $value) {
+            switch ($key) {
+                case 0:
+                    $request['controller'] = $value;
+                    break;
+                case 1:
+                    $request['action'] = $value;
+                    break;
+                case $key%2==0:
+                    $idx = $value;
+                    $params[$value] = '';
+                    break;
+                case $key%2!=0:
+                    $params[$idx] = $value;
+                    break;
             }
-            else
-            {
-                for($a=3;$a<count($request);$a+=2)
-                {
-                    $params[$request[$a]]=$request[$a+1];
-                }
+        }
+        
+        
+        // Include params if precondition succeeds
+        if (count($params)>0) {
+            if (end($params)!='') {
+                $request['params'] = $params;
+            } else {
+                unset($request);
+                $request['controller'] = 'error';
+                $request['action'] = '412';
             }
-    
-            if(file_exists($_SERVER['DOCUMENT_ROOT'].
-                "/../modules/application/src/application/controllers/".
-                $request[1].".php")
-            )
+        }
+        
+        echo '<pre>22222222';
+        print_r($request);
+        echo '</pre>';
+        die;
+        
+        // NOT Controller in URI -> C=index / A=index                   // RESULT 1
+        // YES, Controller in URI:
+        //     Controller exists     -> C=controller *(go below)
+        //     Controller NOT exist  -> error = 404                     // RESULT 2
+        //
+        //         * NOT Action in URI -> C=controller / A=index        // RESULT 3
+        //         * YES, Action in URI:
+        //               Action exists     -> C=controller / A=action   // RESULT 4 (no need to change anything)
+        //               Action NOT exist  -> error = 404               // RESULT 5
+        if (!isset($request['controller'])=='error')
+        {
+            echo 'bueno dias222343535352!!!';
+            if ($request['controller']!='')
             {
-                if(isset($request[2]))
-                    if(in_array($request[2], $controllers[$request[1]]))
-                    {
-                        return array('controller'=>$request[1],
-                            'action'=>$request[2],
-                            'params'=>$params
-                        );
-                    }
-                else
-                {
-                    return array('controller'=>'error',
-                        'action'=>'404'
-                    );
-                }
-                else
-                {
-                    return array('controller'=>$request[1],
-                        'action'=>'index'
-                    );
-                }
+                echo 'bueno dias2222!!!';
+                if (
+                    in_array($request['controller'],
+                        array_map(function ($v) {
+                            return explode('.', $v)[0];
+                        },scandir($_SERVER['DOCUMENT_ROOT'] . '/../modules/application/src/application/controllers'))
+                ) == true
+                ){
+                            if (isset($request['action']))
+                            {
+                                $controller = file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/../modules/application/src/application/controllers/'.$request['controller'].'.php');
+                                if (
+                                    !in_array('case \''.$request['action'].'\':',
+                                        array_map(function ($v) {
+                                            return trim($v);
+                                        }, explode("\n", $controller))
+                                ) == true
+                                ){
+                                            // RESULT 5
+                                            unset($request);
+                                            $request['controller'] = 'error';
+                                            $request['action'] = '404';
+                                        }
+                            } else {
+                                // RESULT 3
+                                $request['action'] = 'index';
+                            }
+                        } else {
+                            // RESULT 2
+                            unset($request);
+                            $request['controller'] = 'error';
+                            $request['action'] = '404';
+                        }
+            } else {
+                // RESULT 1
+                echo 'bueno dias!!!';
+                unset($request);
+                $request['controller'] = 'index';
+                $request['action'] = 'index';
             }
-            else
-            {
-                return array('controller'=>'error',
-                    'action'=>'404'
-                );
-            }
+        }
+        
+        //$request['action'] .= 'Action';
+        
+        echo "<pre>------------";
+        print_r($request);
+        echo "</pre>";
+        die;
+        
+        return $request;
     }
 }
 
