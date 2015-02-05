@@ -1,9 +1,10 @@
 <?php
-
 namespace application\controllers;
 
+
+
 include ('../modules/application/src/application/models/getUsers.php');
-include ('../modules/application/src/application/models/getUsersDB.php');
+
 include ('../modules/application/src/application/models/getUserDB.php');
 include ('../modules/application/src/application/models/getUser.php');
 include ('../modules/application/src/application/models/insertUser.php');
@@ -21,20 +22,19 @@ include('../modules/core/src/core/models/filterForm.php');
 include('../modules/core/src/core/models/renderForm.php');
 include('../modules/core/src/core/models/renderView.php');
 
+
 class Users
+extends \core\models\Controller
+implements \core\models\ControllerInterface
 {
-    
-    public $config;
-    public $request;
-
-
-    public function __construct($config, $request)
+    public $layout ='dashboard';
+        
+    public function index()
     {
-        $this->request = $request;
-        $this->config = $config;
+        header("Location: /users/select");    
     }
     
-    public function insertAction()
+    public function insert()
     {
         if($_POST)
         {
@@ -44,18 +44,43 @@ class Users
             {
         
                 //insertUser($filterdata, $filename);
-                insertUserDB($this->config, $filterdata);
+                insertUserDB($config, $filterdata);
             }
             header('Location: /users');
         }
         else
         {
             $usuario=array('','','','','','',array(),'','',array());
-            $content = renderView($this->request, $config, array('usuario'=>$usuario));
+            $content = renderView($request, $config, array('usuario'=>$usuario));
         }
+        return $content;
     }
-    
-    public function updateAction() 
+    public function delete()
+    {
+        if(isset($_POST['id']))
+        {
+            //             deleteUser($_POST['id'], $filename);
+            if($_POST['submit']=='Bórrame!')
+            {
+                deleteUserDB($config, $_POST['id']);
+            }
+            header('Location: /users');
+        }
+        else
+        {
+            $content = renderView($request, $config, array('usuario'=>$request['params']['id']));
+        }
+        return $content;
+    }
+    public function select($request, $config)
+    {
+        include ('../modules/application/src/application/models/getUsersDB.php');
+        $usuarios = getUsersDB($config);
+        $content = renderView($request, $config, array('usuarios'=>$usuarios));
+        
+        return $content;
+    }
+    public function update()
     {
         if($_POST)
         {
@@ -65,49 +90,17 @@ class Users
             if($validatedata)
             {
                 // $usuario = updateUser($filterdata['id'], $filterdata, $filename);
-                $usuario = updateUserDB($this->config, $filterdata);
+                $usuario = updateUserDB($config, $filterdata);
             }
             header('Location: /users');
         }
         else
         {
-            $usuario = getUserDB($this->config, $this->request['params']['id']);
-            $content = renderView($this->request, $this->config, array('usuario'=>$usuario));
+            $usuario = getUserDB($config, $request['params']['id']);
+            $content = renderView($request, $config, array('usuario'=>$usuario));
         }
+        return $content;
     }
     
-    public function deleteAction()
-    {
-        if(isset($_POST['id']))
-        {
-            //             deleteUser($_POST['id'], $filename);
-            if($_POST['submit']=='Bórrame!')
-            {
-                deleteUserDB($this->config, $_POST['id']);
-            }
-            header('Location: /users');
-        }
-        else
-        {
-            $content = renderView($this->request, $this->config, array('usuario'=>$this->request['params']['id']));
-        }
-    }
-    
-    public function selectAction()
-    {
-        //$usuarios1 = getUsers($filename);
-        $usuarios = getUsersDB($this->config);
-        $content = renderView($this->request, $this->config, array('usuarios'=>$usuarios));
-    }
-    
-    public function indexAction()
-    {
-        $this->selectAction();
-    }
-    
-    public function __destruct()
-    {
-         include('../modules/application/src/application/layouts/dashboard.phtml');
-    }
 }
 

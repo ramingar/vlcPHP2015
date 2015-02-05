@@ -1,17 +1,31 @@
 <?php
+namespace application\controllers;
 
-switch($request['action'])
+class Error 
+extends \core\models\Controller
+implements \core\models\ControllerInterface
 {
-    case '200':
-        echo "TODO OK";
-        return;
-    break;
-        
-    case '404':  
-        $usuarios = getUsers($filename);
-        include('../modules/application/src/application/views/.phtml');
-    break;
+    
+    public $layout = 'jumbotron';
+     
+    public function error404()
+    {
+        die ("error 404");
+    }
+    
+    public function error412()
+    {
+        die ("error 412");
+    } 
+    
+    //     public function setConfig($config)
+    //     {
+    //         echo "config";
+    //         $this->config = $config;
+    //     }
+    
 }
+
 
 
 

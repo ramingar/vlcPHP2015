@@ -16,7 +16,7 @@ function __autoload($className)
 //     print_r($file);
 //     echo "</pre>";
     
-    $filename = $file[0]."/src/".$filename.'.php';
+    $filename = lcfirst($file[0])."/src/".$filename.'.php';
     
     if(file_exists(__DIR__.'/modules/'.$filename))
         require_once(__DIR__.'/modules/'.$filename);

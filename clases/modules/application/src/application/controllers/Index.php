@@ -1,29 +1,25 @@
 <?php
 namespace application\controllers;
 
-include('../modules/core/src/core/models/renderView.php');
-
-
 class Index
+extends \core\models\Controller 
+implements \core\models\ControllerInterface
 {
-    public $config;
-    public $request;
-
-
-    public function __construct($config, $request)
-    {
-        $this->request = $request;
-        $this->config = $config;
-    }
+    public $layout ='jumbotron';
     
-    public function indexAction()
+	public function index()
     {
-        $content = renderView($this->request, $this->config);
+        $content = \core\models\Views::renderView(__METHOD__,$this->getConfig());
+        return $content;
     }
 }
 
 
-// include('../modules/application/src/application/layouts/jumbotron.phtml');
+
+
+
+
+
 
 
 
