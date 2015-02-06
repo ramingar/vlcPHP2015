@@ -6,7 +6,8 @@ nbproject
 .buildpath
 bower_components
 bower_components/*
-**/assets/vendor/*
-**/assets/vendor
+**/vendor/*
+**/vendor
+**/composer.phar
 EJERCICIOS/*
 EJERCICIOS
