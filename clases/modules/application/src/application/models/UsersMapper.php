@@ -30,17 +30,46 @@ class UsersMapper
         $this->config = $config;
     }
 
-	public function getUsers()
+    public function getGateway()
     {
-        $gatewayname = 'application\\models\\Gateways\\'.
-                        $this->mapper.
-                        $this->getConfig()['adapter'];
-        
-        
-        $gateway = new $gatewayname($this->getConfig());   
-
-        
+        return 'application\\models\\Gateways\\'.
+                $this->mapper.
+                $this->getConfig()['adapter'];
+    }
+    
+    public function getUsers()
+    {
+        $gatewayname = $this->getGateway();
+        $gateway = new $gatewayname($this->getConfig());
         return $gateway->getUsers();
+    }
+    
+    public function getUser($id)
+    {
+        $gatewayname = $this->getGateway();
+        $gateway = new $gatewayname($this->getConfig());
+        return $gateway->getUser($id);
+    }
+    
+    public function deleteUser($id)
+    {
+        $gatewayname = $this->getGateway();
+        $gateway = new $gatewayname($this->getConfig());
+        return $gateway->deleteUser($id);
+    }
+    
+    public function insertUser($data)
+    {
+        $gatewayname = $this->getGateway();
+        $gateway = new $gatewayname($this->getConfig());
+        return $gateway->insertUser($data);
+    }
+    
+    public function updateUser($id, $data)
+    {
+        $gatewayname = $this->getGateway();
+        $gateway = new $gatewayname($this->getConfig());
+        return $gateway->updateUser($id, $data);
     }
     
     

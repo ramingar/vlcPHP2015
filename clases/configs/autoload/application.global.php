@@ -8,6 +8,7 @@ return array (
                 'user'=>'root',
                 'password'=>'1234',
                 'database'=>'crud'),
-    'adapter'=>'Mysql',
+    'adapter'=>'Txt',
+    //'adapter'=>'Mysql',
     
 );
