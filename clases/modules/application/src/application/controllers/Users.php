@@ -128,7 +128,7 @@ implements \core\models\ControllerInterface
             $content = Views::renderView(
                                             __METHOD__,
                                             FrontController::getInstace()->getConfig(),
-                                            array('usuario'=>$user[0])
+                                            array('usuario'=>$user)
                                         );
         }
         return $content;

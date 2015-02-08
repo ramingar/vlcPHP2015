@@ -20,8 +20,9 @@ class TxtAdapter
     public function fetch($id = null)
     {
         $users = explode("\n", $this->fileContent);
-        if ($id!==null) {
-            $users = $users[$id];
+        if ($id!==null) {   // GET 1 user
+            $key = $this->findUserKey($id, $users);
+            $users = $users[$key];
         }
         return $users;
     }
@@ -37,26 +38,33 @@ class TxtAdapter
         move_uploaded_file($_FILES['photo']['tmp_name'],
         $_SERVER['DOCUMENT_ROOT']."/".$_FILES['photo']['name']);
         
-        if ($id===null) {
+        $users = $this->fetch();
+        
+        if ($id===null) {   // INSERT
             reset($data);
             $data[key($data)]= hash('sha256', $data['email']);
             $user = implode("|",$data);
-//             echo '<pre>';
-//             print_r($user);
-//             echo '</pre>';
-//             die;
-            
-            file_put_contents($this->config['filename'], "holaaa", FILE_APPEND | LOCK_EX);
-        } else {
-            file_put_contents($filename,implode("|",$data)."\n",FILE_APPEND);
+            $user = $users[0]!='' ? "\n".$user : $user;
+            file_put_contents($this->config['filename'], $user, FILE_APPEND | LOCK_EX);
+        } else {            // UPDATE
+            $this->delete($id);
+            $this->save($data);
         }
     }
     
     public function delete($id)
     {
         $users = $this->fetch();
-        array_splice($users, $id, 1);
+        
+        $key = $this->findUserKey($id, $users);
+        
+        array_splice($users, $key, 1);
         file_put_contents($this->config['filename'],implode("\n",$users));
         return $id;
+    }
+    
+    private function findUserKey($id, $users)
+    {
+        return array_search($id, array_map(function ($v) { return explode("|", $v)[0]; }, $users));
     }
 }

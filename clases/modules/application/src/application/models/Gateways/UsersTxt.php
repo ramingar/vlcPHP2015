@@ -27,6 +27,6 @@ class UsersTxt extends \Phpzero\adapters\TxtAdapter
     
     public function updateUser($id, $data)
     {
-        
+        $this->save($data, $id);
     }
 }

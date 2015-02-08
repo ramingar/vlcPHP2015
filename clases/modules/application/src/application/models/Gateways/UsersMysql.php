@@ -14,7 +14,7 @@ class UsersMysql extends \Phpzero\adapters\MysqlAdapter
     public function getUser($id)
     {
         $sql = "SELECT * FROM users WHERE iduser = '". $id ."'";
-        return $this->fetch($sql);
+        return $this->fetch($sql)[0];
     }
     
     public function deleteUser($id)
